@@ -5,3 +5,8 @@
     mkdir -p /config/.config/openbox && \
     cp /defaults/menu.xml /config/.config/openbox/menu.xml && \
     chown -R abc:abc /config/.config
+
+# copy autostart file
+mkdir -p /config/.config/openbox
+cp /defaults/autostart /config/.config/openbox/autostart
+chown -R abc:abc /config/.config
