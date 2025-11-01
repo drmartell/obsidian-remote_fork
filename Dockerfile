@@ -7,13 +7,14 @@ LABEL maintainer="github@sytone.com" \
       org.opencontainers.image.description="Hosted Obsidian instance allowing access via web browser"
 
 # Set version label
-ARG OBSIDIAN_VERSION=1.8.10
+ARG OBSIDIAN_VERSION=1.9.14
 
 # Update and install extra packages
 RUN echo "**** install packages ****" && \
     apt-get update && \
     apt-get install -y --no-install-recommends curl libnss3 zlib1g-dev dbus-x11 uuid-runtime \
-    libfuse2 libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0 && \
+    libfuse2 libatk1.0-0 libatk-bridge2.0-0 libcups2 libgtk-3-0 \
+    libgbm1 libasound2 libxshmfence1 && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /var/tmp/* /tmp/*
 
 # Download and install Obsidian
@@ -24,7 +25,8 @@ RUN echo "**** download obsidian ****" && \
         "https://github.com/obsidianmd/obsidian-releases/releases/download/v${OBSIDIAN_VERSION}/Obsidian-${OBSIDIAN_VERSION}${FLAG:+-arm64}.AppImage" && \
     chmod +x ./obsidian.AppImage && \
     ./obsidian.AppImage --appimage-extract && \
-    rm ./obsidian.AppImage
+    rm ./obsidian.AppImage && \
+    chmod -R 755 /squashfs-root
 
 # Environment variables
 ENV CUSTOM_PORT="8080" \
