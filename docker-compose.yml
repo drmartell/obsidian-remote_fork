@@ -1,6 +1,7 @@
 services:
   obsidian:
-    image: 'ghcr.io/sytone/obsidian-remote:latest'
+    build: .
+    image: 'obsidian-remote:local'
     container_name: obsidian-remote
     restart: unless-stopped
     ports:
