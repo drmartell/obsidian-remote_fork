@@ -13,5 +13,5 @@ services:
     environment:
       - PUID=1000
       - PGID=1000
-      - TZ=America/Los_Angeles
+      - TZ=${TZ}
       - DOCKER_MODS=linuxserver/mods:universal-git
